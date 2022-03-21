@@ -1,6 +1,6 @@
 const { Sequelize } = require("sequelize");
 
-const database = new Sequelize('users_auth', 'postres', 'freddy', {
+const database = new Sequelize('users_auth', 'postgres', 'freddy', {
   host: 'localhost',
   dialect: 'postgres',
   logging: false
@@ -12,8 +12,9 @@ const testDatabase = async () => {
     console.log('The database is connected sucessfully');
   } catch (err) {
     console.log('Error, trying connect database');
+    console.error(err)
   }
 }
 testDatabase();
 
-module.exports = testDatabase;
+module.exports = database;
