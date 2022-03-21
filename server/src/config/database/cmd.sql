@@ -5,8 +5,8 @@ CREATE TABLE IF NOT EXISTS users (
   name VARCHAR (50),
   bio TEXT,
   phone TEXT,
-  password VARCHAR(30)
+  password TEXT
 );
 
-ALTER TABLE users ADD photo TEXT; 
+ALTER TABLE users ADD photo_public_id TEXT; 
 --  to add new columns to a table exists

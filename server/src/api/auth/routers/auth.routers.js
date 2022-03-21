@@ -1,10 +1,11 @@
 const router = require('express').Router();
 
-router.get('/login', (req, res) => {
-  res.send('logging in with login')
-} )
-router.get('/google', (req, res) => {
-  res.send('logging in with google')
-} )
+const { uploadImageMiddleware } = require('../middlewares/auth.multer');
+const { createUser, loginUser } = require('../services/auth.services');
+
+router.post('/signup', uploadImageMiddleware, createUser);
+
+router.post('/login', loginUser);
+
 
 module.exports = router;

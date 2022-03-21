@@ -16,6 +16,9 @@ const usersSchema = sequelize.define('users', {
   photo: {
     type: DataTypes.TEXT
   },
+  photo_public_id: {
+    type: DataTypes.TEXT
+  },
   bio: {
     type: DataTypes.TEXT
   },
