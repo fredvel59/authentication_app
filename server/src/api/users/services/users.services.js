@@ -1,5 +1,6 @@
 const USERS = require('../models/users.models');
-
+// clodinaary
+const clodinaary = require('../../auth/config/cloudinary.config');
 
 exports.getAllUser = async (req, res) => {
   const allUsers = await USERS.findAll();
@@ -13,8 +14,10 @@ exports.getAllUser = async (req, res) => {
 exports.removeUser = async (req, res) => {
   const {id} = req.params;
   try {
-    const user = await USERS.destroy({where: {user_id: id}})
-    res.send({message: `the user ${user.name}, was removed successfully`, data: user})
+    const id_cloudinary = await USERS.findOne({where: {user_id: id}});
+    clodinaary.uploader.destroy(id_cloudinary.photo_public_id);
+    await USERS.destroy({where: {user_id: id}})
+    res.send({message: `the user with id: ${id}, was removed successfully`})
   } catch (err) {
     res.send(err);
   }
