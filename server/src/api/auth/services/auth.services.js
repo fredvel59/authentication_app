@@ -7,34 +7,8 @@ const cloudinary = require('../config/cloudinary.config');
 // random string
 const randomString = require('../config/string.random');
 // confirm email 
-// const confirmEmail = require('../config/nodeEmailer');
-const nodemailer = require('nodemailer');
+const confirmEmail = require('../config/nodeEmailer');
 
-const confirmEmail = (email, key) => {
-  const transporter = nodemailer.createTransport({
-    service: 'gmail',
-    auth: {
-      user: 'fred.vel.dev59@gmail.com',
-      pass: 'vaoblcfuawwsmzzp'
-    }
-  })
-  const mailOptions = {
-    from: 'fred.vel.dev59@gmail.com',
-    to: email,
-    subject: 'Confirm Email',
-    text: `Please confirm your emil and send us this key: ${key}`
-  }
-  transporter.sendMail(mailOptions, (err, info) => {
-    if(err) {
-      // console.log(err);
-      console.log(info);
-      // return false;
-    }else {
-      return `Email sent to ${email}`
-    }
-  } )
-}
-// end
 
 exports.createUser = async (req, res) => {
   const { password, email, name } = req.body;
@@ -82,6 +56,27 @@ exports.createUser = async (req, res) => {
         }
       })
     }
+  }
+}
+
+exports.verifyEmail = async (req, res) => {
+  const {key} = req.body;
+  const {id} = req.params; 
+  try {
+    const user = await USERS.findOne({where: {user_id: id}});
+    if(key === user.verify_email) {
+      try {
+        user.verified = true;
+        await user.save();
+        res.send({message: 'Your Key is correct, your email was verified, now you can login in the app', data: user })
+      } catch (err) {
+        res.send(err);
+      }
+    }else {
+      res.send({message: 'your key is not correct, please check out your email'})
+    }
+  } catch (err) {
+    res.send(err)
   }
 }
 

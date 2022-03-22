@@ -1,7 +1,7 @@
 // code to send an email to verify email.
 const nodemailer = require('nodemailer');
 
-exports.confirmEmail = (email, key) => {
+const confirmEmail = (email, key) => {
   const transporter = nodemailer.createTransport({
     service: 'gmail',
     auth: {
@@ -25,3 +25,5 @@ exports.confirmEmail = (email, key) => {
     }
   } )
 }
+
+module.exports = confirmEmail;
