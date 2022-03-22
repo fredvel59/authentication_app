@@ -7,7 +7,6 @@ const storage = multer.diskStorage({
     try {
       await fs.ensureDir(path.join(__dirname, '../images'))
       cb(null, path.join(__dirname, '../images'));
-      // console.log('success file created');
     } catch (err) {
       console.log(err);
     }

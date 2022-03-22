@@ -9,4 +9,9 @@ CREATE TABLE IF NOT EXISTS users (
 );
 
 ALTER TABLE users ADD photo_public_id TEXT; 
+
+ALTER TABLE users ALTER COLUMN password TEXT;
 --  to add new columns to a table exists
+
+-- to delete a column from table
+ALTER TABLE users DROP COLUMN password;
