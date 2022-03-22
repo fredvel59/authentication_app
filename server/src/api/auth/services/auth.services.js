@@ -4,7 +4,8 @@ const fs = require('fs-extra');
 const bcrypt = require('bcryptjs');
 // cloudinary library to upload images a cloudinary host
 const cloudinary = require('../config/cloudinary.config');
-
+// random string
+// const randomString = require('');
 
 
 exports.createUser = async (req, res) => {

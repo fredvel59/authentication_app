@@ -9,6 +9,8 @@ CREATE TABLE IF NOT EXISTS users (
 );
 
 ALTER TABLE users ADD photo_public_id TEXT; 
+ALTER TABLE users ADD verify_email VARCHAR(12); 
+ALTER TABLE users ADD verified BOOLEAN DEFAULT false; 
 
 ALTER TABLE users ALTER COLUMN password TEXT;
 --  to add new columns to a table exists

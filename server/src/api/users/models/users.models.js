@@ -27,6 +27,12 @@ const usersSchema = sequelize.define('users', {
   },
   password: {
     type: DataTypes.TEXT
+  },
+  verify_email: {
+    type: DataTypes.TEXT
+  },
+  verified: {
+    type: DataTypes.BOOLEAN
   }
 }, {
   timestamps: false
