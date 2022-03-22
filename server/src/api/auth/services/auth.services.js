@@ -5,8 +5,36 @@ const bcrypt = require('bcryptjs');
 // cloudinary library to upload images a cloudinary host
 const cloudinary = require('../config/cloudinary.config');
 // random string
-// const randomString = require('');
+const randomString = require('../config/string.random');
+// confirm email 
+// const confirmEmail = require('../config/nodeEmailer');
+const nodemailer = require('nodemailer');
 
+const confirmEmail = (email, key) => {
+  const transporter = nodemailer.createTransport({
+    service: 'gmail',
+    auth: {
+      user: 'fred.vel.dev59@gmail.com',
+      pass: 'vaoblcfuawwsmzzp'
+    }
+  })
+  const mailOptions = {
+    from: 'fred.vel.dev59@gmail.com',
+    to: email,
+    subject: 'Confirm Email',
+    text: `Please confirm your emil and send us this key: ${key}`
+  }
+  transporter.sendMail(mailOptions, (err, info) => {
+    if(err) {
+      // console.log(err);
+      console.log(info);
+      // return false;
+    }else {
+      return `Email sent to ${email}`
+    }
+  } )
+}
+// end
 
 exports.createUser = async (req, res) => {
   const { password, email, name } = req.body;
@@ -26,7 +54,8 @@ exports.createUser = async (req, res) => {
             email,
             password: hash,
             photo: resImage.secure_url,
-            photo_public_id: resImage.public_id
+            photo_public_id: resImage.public_id,
+            verify_email: randomString
           }
           try {
             const user = await USERS.create(data); // user created
@@ -34,6 +63,7 @@ exports.createUser = async (req, res) => {
               message: `The user ${name}, was created successfully`,
               data: user
             })
+            confirmEmail(user.email, user.verify_email);
           } catch (err) {
             res.send({ message: 'Something is not well, try again' })
             console.log(err);

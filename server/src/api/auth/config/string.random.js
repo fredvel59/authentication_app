@@ -1,6 +1,6 @@
 // function to create a random string.
 
-exports.randomString = long => {
+const randomString = long => {
   const banc = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
   let random = "";
   for (let i = 0; i < long; i++) {
@@ -8,3 +8,5 @@ exports.randomString = long => {
   }
   return random;
 };
+
+module.exports =  randomString(12);

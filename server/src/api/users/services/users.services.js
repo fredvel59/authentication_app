@@ -9,3 +9,13 @@ exports.getAllUser = async (req, res) => {
     res.send({message: 'there is no users added yet'})
   }
 }
+
+exports.removeUser = async (req, res) => {
+  const {id} = req.params;
+  try {
+    const user = await USERS.destroy({where: {user_id: id}})
+    res.send({message: `the user ${user.name}, was removed successfully`, data: user})
+  } catch (err) {
+    res.send(err);
+  }
+}
