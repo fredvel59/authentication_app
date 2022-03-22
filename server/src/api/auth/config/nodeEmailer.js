@@ -13,7 +13,7 @@ const confirmEmail = (email, key) => {
     from: 'fred.vel.dev59@gmail.com',
     to: email,
     subject: 'Confirm Email',
-    text: `Please confirm your emil and send us this key: ${key}`
+    text: `Please confirm your email and send us this key: ${key}`
   }
   transporter.sendMail(mailOptions, (err, info) => {
     if(err) {

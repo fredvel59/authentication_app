@@ -10,6 +10,7 @@ const randomString = require('../config/string.random');
 const confirmEmail = require('../config/nodeEmailer');
 
 
+// services
 exports.createUser = async (req, res) => {
   const { password, email, name } = req.body;
   const userExists = await USERS.findOne({ where: { email } }); // to find a existing user
@@ -34,8 +35,8 @@ exports.createUser = async (req, res) => {
           try {
             const user = await USERS.create(data); // user created
             res.json({
-              message: `The user ${name}, was created successfully`,
-              data: user
+              message: `We sent you a secret key to your Email, please check it out, and send us the key to confirm it`,
+              // data: user
             })
             confirmEmail(user.email, user.verify_email);
           } catch (err) {
@@ -84,13 +85,17 @@ exports.loginUser = async (req, res) => {
   const {password, email} = req.body;
   const user = await USERS.findOne({where: {email}})
   if(user) {
-    bcrypt.compare(password, user.password, async (err, data) => {
-      if(data) {
-        res.send({auth: true, data: user})
-      }else {
-        res.send({message: 'your passoword in not correct, try again', auth: false})
-      }
-    } )
+    if(user.verified) {
+      bcrypt.compare(password, user.password, async (err, data) => {
+        if(data) {
+          res.send({auth: true, data: user})
+        }else {
+          res.send({message: 'your passoword in not correct, try again', auth: false})
+        }
+      } )
+    }else {
+      res.send({message: 'please verified your email', auth: false})
+    }
   }else {
     res.json({message: `User with email: ${email} isn't exists`, auth: false})
   }
