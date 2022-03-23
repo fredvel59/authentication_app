@@ -47,7 +47,7 @@ Method: POST
 
 ## Edit user's info
 
-    http://localhost:8000/auth/login 
+    http://localhost:8000/users/edit/:id
     
 Method: POST
     
@@ -56,6 +56,17 @@ Method: POST
       "name": "Freddy Velarde", // this section must be greater than 8 and less than 50 charactrs
       "phone": "+591 65623290",
       "bio": "Hi, I am a software developer" 
+    }
+
+## Edit user's photo
+
+    http://localhost:8000/users/photo/:id
+    
+Method: POST
+    
+    // body
+    {
+      photo: your file // you again need to use FormData() in javascript only 
     }
 
 

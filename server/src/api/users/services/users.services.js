@@ -2,6 +2,7 @@ const USERS = require('../models/users.models');
 const fs = require('fs-extra');
 // clodinaary
 const clodinaary = require('../../auth/config/cloudinary.config');
+// const { cloudinary_js_config } = require('../../auth/config/cloudinary.config');
 
 
 
@@ -55,24 +56,26 @@ exports.editUsersInfo = async (req, res) => {
   }
 }
 
-// exports.editUsersInfo = async (req, res) => {
-//   const {user_id} = req.params;
-//   const { name, bio, phone } = req.body;
-//   if(req.file) {
-//     const user = await USERS.findOne({ where: {user_id} });
-//   if(user) {
-//     user.set({
-//       name,
-//       bio, 
-//       phone,
-//     })
-//     await user.save();
-//     res.send({message: `the user: ${user.name}, was updated sucessfully`, data: user})
-//   }else {
-//     res.send({message: `The user with id: ${user_id}, dosen't exist`})
-//   }
-//   }else {
-//     res.send({message: 'There is no file, please upload a image'})
-//   }
-//   await fs.unlink(req.file.path);
-// }
+exports.editPhotoProfile = async (req, res) => {
+  const { id } = req.params;
+  if (req.file) {
+    const user = await USERS.findOne({ where: { user_id: id } });
+    if (user) {
+      try {
+        await clodinaary.uploader.destroy(user.photo_public_id); // to remove from cloudinary host the last photo
+        const resCloudinary = await clodinaary.uploader.upload(req.file.path);
+        user.photo = resCloudinary.secure_url;
+        user.photo_public_id = resCloudinary.public_id;
+        await user.save();
+        res.send({ message: `your photo profile, was updated sucessfully`, data: user.photo })
+      } catch (err) {
+        res.send({ mesage: 'error updating photo profile' })
+      }
+    await fs.unlink(req.file.path);
+    } else {
+      res.send({ message: `The user with id: ${user_id}, dosen't exist` })
+    }
+  } else {
+    res.send({ message: 'There is no file, please upload a image' })
+  }
+}
