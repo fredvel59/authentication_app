@@ -82,21 +82,27 @@ exports.verifyEmail = async (req, res) => {
 }
 
 exports.loginUser = async (req, res) => {
-  const {password, email} = req.body;
-  const user = await USERS.findOne({where: {email}})
-  if(user) {
-    if(user.verified) {
-      bcrypt.compare(password, user.password, async (err, data) => {
-        if(data) {
-          res.send({auth: true, data: user})
-        }else {
-          res.send({message: 'your passoword in not correct, try again', auth: false})
-        }
-      } )
-    }else {
-      res.send({message: 'please verified your email', auth: false})
+  const { password, email } = req.body;
+  try {
+    const user = await USERS.findOne({ where: { email } })
+    if (user) {
+      if (user.verified) {
+        bcrypt.compare(password, user.password, async (err, data) => {
+          if(err) {
+            res.send(err)
+          } else if (data) {
+            res.send({ auth: true, data: user })
+          } else {
+            res.send({ message: 'your passoword in not correct, try again', auth: false })
+          }
+        })
+      } else {
+        res.send({ message: 'please verified your email', auth: false })
+      }
+    } else {
+      res.json({ message: `User with email: ${email} isn't exists`, auth: false })
     }
-  }else {
-    res.json({message: `User with email: ${email} isn't exists`, auth: false})
+  } catch (err) {
+    res.send(err)
   }
 }

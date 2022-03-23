@@ -69,6 +69,12 @@ Method: POST
       photo: your file // you again need to use FormData() in javascript only 
     }
 
+## Get it back Password 
+
+    http://localhost:8000/users/newPassd/:id
+    
+Method: GET
+
 
 
 

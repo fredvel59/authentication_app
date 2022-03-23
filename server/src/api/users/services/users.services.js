@@ -2,7 +2,11 @@ const USERS = require('../models/users.models');
 const fs = require('fs-extra');
 // clodinaary
 const clodinaary = require('../../auth/config/cloudinary.config');
-// const { cloudinary_js_config } = require('../../auth/config/cloudinary.config');
+// nodemailer, newpassword function, to send an email and get it back password.
+const newPasswordEmailer = require('../helpers/emailer.passd');
+const newPassword = require('../helpers/new.password');
+// bcrypt to haching passwords
+const bcrypt = require('bcryptjs');
 
 
 
@@ -77,5 +81,31 @@ exports.editPhotoProfile = async (req, res) => {
     }
   } else {
     res.send({ message: 'There is no file, please upload a image' })
+  }
+}
+
+
+
+exports.passwordForgotten = async (req, res) => {
+  const {id} = req.params;
+  const user = await USERS.findOne({where: {user_id: id}});
+  if(user) {
+    try {
+      const passwd = newPassword;
+      bcrypt.hash(passwd, 10, async (err, hash) => {
+        if(err) {
+          res.send(err)
+        } else {
+          user.password = hash;
+          await user.save();
+          newPasswordEmailer(user.email, passwd)
+          res.send({ message: `We sent an email to: ${user.email}, please check it out` })
+        }
+      })
+    } catch (err) {
+      res.send(err)
+    }
+  }else {
+    res.send({message: `User with id: ${id}, dosen't exist`})
   }
 }
