@@ -33,6 +33,9 @@ const usersSchema = sequelize.define('users', {
   },
   verified: {
     type: DataTypes.BOOLEAN
+  },
+  timestamp: {
+    type: DataTypes.DATE
   }
 }, {
   timestamps: false
