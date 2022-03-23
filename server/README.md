@@ -47,7 +47,7 @@ Method: POST
 
 ## Edit user's info
 
-http://localhost:8000/auth/login 
+    http://localhost:8000/auth/login 
     
 Method: POST
     
