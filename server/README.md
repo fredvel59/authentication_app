@@ -53,7 +53,7 @@ Method: POST
     
     // body
     {
-      "name": "Freddy Velarde", // this section must be greater than 8 and less than charactrs
+      "name": "Freddy Velarde", // this section must be greater than 8 and less than 50 charactrs
       "phone": "+591 65623290",
       "bio": "Hi, I am a software developer" 
     }
