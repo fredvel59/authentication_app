@@ -13,5 +13,4 @@ app.set('port', process.env.PORT || 8000);
 app.use('/users', require('./api/users/routers/users.routers'));
 app.use('/auth', require('./api/auth/routers/auth.routers'));
 
-
 module.exports = app;

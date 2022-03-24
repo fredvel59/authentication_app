@@ -19,7 +19,7 @@ exports.getAllUser = async (req, res) => {
       res.send({message: 'there is no users added yet'})
     }
   } catch (err) {
-    res.send(err);
+    res.json(err);
   }
 }
 

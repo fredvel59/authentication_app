@@ -6,15 +6,15 @@ const database = new Sequelize('users_auth', 'postgres', 'freddy', {
   logging: false
 });
 
-const testDatabase = async () => {
+const configDatabase = async () => {
   try {
     await database.authenticate();
     console.log('The database is connected sucessfully');
   } catch (err) {
-    console.log('Error, trying connect database');
-    console.error(err)
+    console.log('Error connecting database')
   }
 }
-testDatabase();
+
+configDatabase();
 
 module.exports = database;

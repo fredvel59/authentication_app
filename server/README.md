@@ -1,5 +1,5 @@
 # Backend 
-This a challenge from: [Dev Challenge] (https://devchallenges.io/challenges/N1fvBjQfhlkctmwj1tnw)
+<!-- This a challenge from: [Dev Challenge] (https://devchallenges.io/challenges/N1fvBjQfhlkctmwj1tnw) -->
 
 ## Little description
 My server communicates through **REST API** also it's created complety in javascript with Nodejs and Express as framework.
@@ -86,7 +86,7 @@ Method: POST
     {
       "password": "your last password",
       "newPassword": "your naw password",
-      "repeatePassword": "repeate your name password"
+      "repeatePassword": "repeate your new password"
     }
 
 ## Get All Users
