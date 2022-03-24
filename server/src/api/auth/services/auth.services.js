@@ -8,6 +8,8 @@ const cloudinary = require('../config/cloudinary.config');
 const randomString = require('../helpers/string.random');
 // confirm email 
 const confirmEmail = require('../helpers/nodeEmailer');
+// jwt
+const jwt = require('jsonwebtoken');
 
 
 // services
@@ -81,6 +83,8 @@ exports.verifyEmail = async (req, res) => {
   }
 }
 
+// eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTMsImlhdCI6MTY0ODEzMTQwNCwiZXhwIjoxNjQ5MzQxMDA0fQ.6J08kFGe0T2e9M6zs_I6aCjc1g9L-x6yMaDt6V3rGjM
+
 exports.loginUser = async (req, res) => {
   const { password, email } = req.body;
   try {
@@ -91,7 +95,8 @@ exports.loginUser = async (req, res) => {
           if(err) {
             res.send(err)
           } else if (data) {
-            res.send({ auth: true, data: user })
+            const token = jwt.sign({id: user.user_id }, process.env.JWT_KEY, {expiresIn: 60*60*24*14});
+            res.send({ auth: true, token})
           } else {
             res.send({ message: 'your passoword in not correct, try again', auth: false })
           }

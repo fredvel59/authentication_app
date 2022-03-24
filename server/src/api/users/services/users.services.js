@@ -138,3 +138,13 @@ exports.changePassword = async (req, res) => {
     res.send({message: `the user with id: ${id} dosen't exist`  })
   }
 }
+
+
+exports.getInfoUsersById = async (req, res) => {
+  const user = await USERS.findOne({where: {user_id: req.user_id}});
+  if(user) {
+    res.send(user)
+  }else {
+    res.send({message: `user with id: ${id}, dosen't exist`})
+  }
+}

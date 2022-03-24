@@ -52,11 +52,12 @@ Method: POST
 Method: POST
     
     // body
-    {
+    body: JSON.stringify({
       "name": "Freddy Velarde", // this section must be greater than 8 and less than 50 charactrs
       "phone": "+591 65623290",
       "bio": "Hi, I am a software developer" 
-    }
+    })
+    
 
 ## Edit user's photo
 
@@ -88,7 +89,29 @@ Method: POST
       "repeatePassword": "repeate your name password"
     }
 
+## Get All Users
 
+    http://localhost:8000/users/all
 
+METHOD: GET  and you need access token
 
+    {
+      method: "GET",
+      headers: {
+        "access-token": // your token
+      }
+    }
+
+## Get user by id 
+
+    http://localhost:8000/users/all
+
+METHOD: GET  and you need access token
+
+    {
+      method: "GET",
+      headers: {
+        "access-token": // your token
+      }
+    }
 
