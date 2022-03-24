@@ -17,7 +17,7 @@ Method: POST
       "name": "Sergio Herrera",
       "email: "sergio.example@gmail.com",
       "photo": // if you are in javascript, you need to use FormData() to upload your file,
-      "passoword: "password"
+      "passoword: "password" // password must be greater than 6 characters
     }
 
 ## Confirm Email
@@ -39,8 +39,8 @@ Method: POST
     
     // body
     {
-      "email: "sergio.example@gmail.com",
-      "passoword: "password"
+      "email": "sergio.example@gmail.com",
+      "password": "password"
     }
 
 # Get Info for Users
@@ -75,7 +75,18 @@ Method: POST
     
 Method: GET
 
+## Change Password
 
+    http://localhost:8000/users/changepasswd/:id
+    
+Method: POST
+    
+    // body
+    {
+      "password": "your last password",
+      "newPassword": "your naw password",
+      "repeatePassword": "repeate your name password"
+    }
 
 
 

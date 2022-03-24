@@ -84,8 +84,6 @@ exports.editPhotoProfile = async (req, res) => {
   }
 }
 
-
-
 exports.passwordForgotten = async (req, res) => {
   const {id} = req.params;
   const user = await USERS.findOne({where: {user_id: id}});
@@ -107,5 +105,36 @@ exports.passwordForgotten = async (req, res) => {
     }
   }else {
     res.send({message: `User with id: ${id}, dosen't exist`})
+  }
+}
+
+
+exports.changePassword = async (req, res) => {
+  const { id } = req.params;
+  const { password, newPassword, repeatePassword } = req.body;
+  const user = await USERS.findOne({ where: {user_id: id}});
+  if(user) {
+    // verify password
+    if(newPassword === repeatePassword) {
+      bcrypt.compare(password, user.password, (err, data) => {
+        if(data) {
+          bcrypt.hash(newPassword, 10, async (err, hash) => {
+            if (err) {
+              res.send(err)
+            } else {
+              user.password = hash;
+              await user.save();
+              res.send({message: 'your password was changed successfully'})
+            }
+          })
+        }else {
+          res.send({message: 'your password is not correct'})
+        }
+      })   
+    }else {
+      res.send({message: "your new password dosen't made match, please introduce your new password correct"})
+    }
+  }else {
+    res.send({message: `the user with id: ${id} dosen't exist`  })
   }
 }
