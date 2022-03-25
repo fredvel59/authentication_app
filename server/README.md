@@ -1,5 +1,4 @@
 # Documentation about the REST API
-<!-- This a challenge from: [Dev Challenge] (https://devchallenges.io/challenges/N1fvBjQfhlkctmwj1tnw) -->
 
 ## Little description
 My server communicates through **REST API** also it's created complety in javascript with Nodejs and Express as framework.
@@ -140,7 +139,7 @@ METHOD: GET  and you need access token
 
 ## Get user by id 
 
-    http://localhost:8000/users/ingo
+    http://localhost:8000/users/info
 
 METHOD: GET  and you need access token
 
