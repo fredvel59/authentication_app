@@ -140,7 +140,7 @@ METHOD: GET  and you need access token
 
 ## Get user by id 
 
-    http://localhost:8000/users/all
+    http://localhost:8000/users/ingo
 
 METHOD: GET  and you need access token
 
@@ -153,7 +153,7 @@ METHOD: GET  and you need access token
 
 ## Remove user
 
-    http://localhost:8000/users/remove/:id
+    http://localhost:8000/users/remove
 
 METHOD: POST  and you need access token
 

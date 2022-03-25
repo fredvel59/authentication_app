@@ -19,8 +19,8 @@ exports.createUser = async (req, res) => {
   if (userExists) {
     res.json({ message: `The email: ${email}, is already used, please try a new email `})
   } else { // user dosen't exists, it can be created
-    const resImage = await cloudinary.uploader.upload(req.file.path);
     if (name.length > 8 & email.length > 8 & password.length >= 6 & name.length < 50) {
+      const resImage = await cloudinary.uploader.upload(req.file.path);
       bcrypt.hash(password, 10, async (err, hash) => {
         if (err) {
           console.log(err);
@@ -60,6 +60,7 @@ exports.createUser = async (req, res) => {
       })
     }
   }
+  await fs.unlink(req.file.path) // this code remove images from /auth/images
 }
 
 exports.verifyEmail = async (req, res) => {
