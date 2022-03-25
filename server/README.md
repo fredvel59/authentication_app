@@ -1,4 +1,4 @@
-# Backend 
+# Documentation about the REST API
 <!-- This a challenge from: [Dev Challenge] (https://devchallenges.io/challenges/N1fvBjQfhlkctmwj1tnw) -->
 
 ## Little description

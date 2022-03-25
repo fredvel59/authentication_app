@@ -13,7 +13,7 @@ router.get('/newpassd/:id', passwordForgotten); // code to get it back password
 router.post('/changepasswd/:id', changePassword);
 
 // get user's info
-router.get('/all', testToken, getAllUser);
+router.get('/all', testToken ,getAllUser);
 router.get('/info', testToken, getInfoUsersById);
 
 

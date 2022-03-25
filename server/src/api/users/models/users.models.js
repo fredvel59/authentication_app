@@ -41,4 +41,6 @@ const usersSchema = sequelize.define('users', {
   timestamps: false
 } )
 
+// usersSchema.sequelize.sync().then(()=>{ usersSchema.sequelize.close() })
+
 module.exports = usersSchema;

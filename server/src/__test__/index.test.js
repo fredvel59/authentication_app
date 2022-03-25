@@ -1,6 +1,4 @@
 const request = require('supertest');
-// const { getAllUser } = require('../api/users/services/users.services');
-// const router = require('../api/users/routers/users.routers');
 const app = require('../app');
 
 describe('GET /users/all', () => {
@@ -10,9 +8,18 @@ describe('GET /users/all', () => {
   })
 })
 
-describe('GET /users/info', () => {
-  test('should responde a 200 status code', async () => {
-    const response = await request(app).get('/users/info').send();
-    expect(response.statusCode).toBe(200);
-  })
-})
+
+// describe('POST /changepasswd/:id', () => {
+//   test('should responde a 200 status code', async () => {
+//     const response = await request(app).get('/').send({});
+//     expect(response.statusCode).toBe(200);
+//   })
+// })
+
+
+// describe('GET /users/info', () => {
+//   test('should responde a 200 status code', async () => {
+//     const response = await request(app).get('/users/info').send();
+//     expect(response.statusCode).toBe(200);
+//   })
+// })

@@ -3,7 +3,15 @@ const { Sequelize } = require("sequelize");
 const database = new Sequelize('users_auth', 'postgres', 'freddy', {
   host: 'localhost',
   dialect: 'postgres',
-  logging: false
+  logging: false,
+  pool: {
+    max: 5,
+    min: 0,
+    acquire: 30000,
+    idle: 10000
+    // evict: 0
+  }
+
 });
 
 const configDatabase = async () => {
