@@ -9,7 +9,7 @@ const { getAllUser, removeUser, editUsersInfo, editPhotoProfile, passwordForgott
 router.post('/remove/:id', testToken  ,removeUser);
 router.post('/edit/:id', editUsersInfo)
 router.post('/photo/:id', uploadImageMiddleware, editPhotoProfile)
-router.get('/newpassd/:id', passwordForgotten); // code to get it back password 
+router.get('/newpassd/:id', testToken ,passwordForgotten); // code to get it back password 
 router.post('/changepasswd/:id', changePassword);
 
 // get user's info

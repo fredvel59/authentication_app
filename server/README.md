@@ -4,20 +4,29 @@
 ## Little description
 My server communicates through **REST API** also it's created complety in javascript with Nodejs and Express as framework.
 
-## EndPoints
+## SignUp and LogIn
 
 ## Create a new user
+
+These examples were made only for **Javascript developers**
 
     http://localhost:8000/auth/signup 
     
 Method: POST
     
-    // body
+    // code for javascript developers
     {
-      "name": "Sergio Herrera",
-      "email: "sergio.example@gmail.com",
-      "photo": // if you are in javascript, you need to use FormData() to upload your file,
-      "passoword: "password" // password must be greater than 6 characters
+      method: "POST",
+      headers: {
+        'Content-Type': 'application/json',
+        'Content-Type': 'multipart/form-data' // use FormData()        
+      },
+      body: JSON.stringify({
+        name: "Sergio Herrera",
+        email: "sergio.example@gmail.com",
+        photo: // if you are in javascript, you need to use FormData() to upload your file,
+        passoword: "password" // password must be greater than 6 characters
+      }),
     }
 
 ## Confirm Email
@@ -26,10 +35,16 @@ Method: POST
     
 Method: POST
     
-    // body
     {
-      "key": "you can get it in your email"
+      method: "POST",
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        key: // copy the key from your email
+      })  
     }
+    
 
 ## Register user
 
@@ -37,11 +52,16 @@ Method: POST
     
 Method: POST
     
-    // body
-    {
-      "email": "sergio.example@gmail.com",
-      "password": "password"
-    }
+    // code for javascript developers
+    method: "POST",
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      email: "sergio.example@gmail.com",
+      passoword: "password" // password must be greater than 6 characters
+    }) // this code will give you an access-token 
+
 
 # Get Info for Users
 
@@ -51,12 +71,17 @@ Method: POST
     
 Method: POST
     
-    // body
-    body: JSON.stringify({
-      "name": "Freddy Velarde", // this section must be greater than 8 and less than 50 charactrs
-      "phone": "+591 65623290",
-      "bio": "Hi, I am a software developer" 
-    })
+    {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'        
+      },
+      body: JSON.stringify({
+        name: "Freddy Velarde", // this section must be greater than 8 and less than 50       charactrs
+        phone: "+591 65623290",
+        bio: "Hi, I am a software developer" 
+      })
+    }
     
 
 ## Edit user's photo
@@ -65,8 +90,11 @@ Method: POST
     
 Method: POST
     
-    // body
-    {
+    { 
+      method: 'POST',
+      headers: {
+        'Content-type': 'multipart/form-data'
+      }
       photo: your file // you again need to use FormData() in javascript only 
     }
 
@@ -75,6 +103,14 @@ Method: POST
     http://localhost:8000/users/newPassd/:id
     
 Method: GET
+
+    {
+      method: 'GET',
+      headers: {
+        'access-token': // your token
+      }
+    }    
+
 
 ## Change Password
 
