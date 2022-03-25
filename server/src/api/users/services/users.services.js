@@ -24,14 +24,19 @@ exports.getAllUser = async (req, res) => {
 }
 
 exports.removeUser = async (req, res) => {
+  const {password} = req.body;
   const {id} = req.params;
-  try {
-    const id_cloudinary = await USERS.findOne({where: {user_id: id}});
-    clodinaary.uploader.destroy(id_cloudinary.photo_public_id);
-    await USERS.destroy({where: {user_id: id}})
-    res.send({message: `the user with id: ${id}, was removed successfully`})
-  } catch (err) {
-    res.send(err);
+  const id_cloudinary = await USERS.findOne({where: {user_id: id}}); // ! 'id_cloudinary' is the user to remove
+  if(password === id_cloudinary.password) {
+    try {
+      clodinaary.uploader.destroy(id_cloudinary.photo_public_id);
+      await USERS.destroy({where: {user_id: id}})
+      res.send({message: `the user with id: ${id}, was removed successfully`})
+    } catch (err) {
+      res.send(err);
+    }
+  }else { // ! if the password is not correct
+    res.send({message: 'your password is not correct, you cannot remove your account'})
   }
 }
 

@@ -115,3 +115,20 @@ METHOD: GET  and you need access token
       }
     }
 
+## Remove user
+
+    http://localhost:8000/users/remove/:id
+
+METHOD: POST  and you need access token
+
+    {
+      method: "POST",
+      headers: {
+        'Content-Type': 'application/json'
+        'access-token': // your token
+      },
+      body: JSON.stringify({
+        password: 'your password' // you need your current password to remove your account
+      }),
+    }
+

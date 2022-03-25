@@ -6,7 +6,7 @@ const { uploadImageMiddleware } = require('../../auth/config/multer.config');
 const { getAllUser, removeUser, editUsersInfo, editPhotoProfile, passwordForgotten, changePassword, getInfoUsersById } = require('../services/users.services');
 
 // edit user
-router.delete('/remove/:id', removeUser);
+router.post('/remove/:id', testToken  ,removeUser);
 router.post('/edit/:id', editUsersInfo)
 router.post('/photo/:id', uploadImageMiddleware, editPhotoProfile)
 router.get('/newpassd/:id', passwordForgotten); // code to get it back password 
