@@ -1,11 +1,6 @@
 const request = require('supertest');
 const app = require('../app');
-// database
-// const USERS = require('../api/users/models/users.models');
-// validating password from the database
-// const { comparePassword } = require('../api/auth/config/bcrypt.compare');
 
-// testing logIn EndPoint
 describe('POST /auth/login', () => {
   // describe('When passed a username and password', () => {}) 
   // describe('When password or email is missing', () => { })
@@ -27,4 +22,12 @@ describe('POST /auth/login', () => {
     const response = await request(app).post('/auth/login').send(data)
     expect(response.body.auth).toEqual(false);
   })
+
+  test('When the email is verified', async () => {
+    const data = {
+      email: 'vsf13827575p122@pre.fcpn.edu.bo'
+    } 
+    const response = await request(app).post('/auth/login').send(data); 
+    expect(response.body.emailVerified).toBe(undefined) 
+  } )
 })

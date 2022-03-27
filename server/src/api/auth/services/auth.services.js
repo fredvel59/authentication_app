@@ -10,9 +10,6 @@ const randomString = require('../helpers/string.random');
 const confirmEmail = require('../helpers/nodeEmailer');
 // jwt
 const jwt = require('jsonwebtoken');
-// compare password
-const { comparePassword } = require('../config/bcrypt.compare');
-
 
 
 // services
@@ -110,7 +107,7 @@ exports.loginUser = async (req, res) => {
           }
         })
       } else {
-        res.send({ message: 'please verified your email', auth: false })
+        res.send({ message: 'please verified your email', emailVerified: false })
       }
     } else {
       res.json({ message: `User with email: ${email} isn't exists`, auth: false })
