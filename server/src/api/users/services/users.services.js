@@ -47,7 +47,8 @@ exports.removeUser = async (req, res) => {
 }
 
 exports.editUsersInfo = async (req, res) => {
-  const { id } = req.params;
+  // const { id } = req.params;
+  const id = req.user_id;
   const { name, bio, phone } = req.body;
   try {
     const user = await USERS.findOne({ where: { user_id: id } });

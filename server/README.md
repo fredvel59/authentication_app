@@ -67,14 +67,15 @@ Method: POST
 
 ## Edit user's info
 
-    http://localhost:8000/users/edit/:id
+    http://localhost:8000/users/edit
     
 Method: POST
     
     {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json'        
+        'Content-Type': 'application/json',
+        'access-token': // your token        
       },
       body: JSON.stringify({
         name: "Freddy Velarde", // this section must be greater than 8 and less than 50       charactrs
