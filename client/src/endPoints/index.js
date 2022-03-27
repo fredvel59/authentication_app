@@ -5,6 +5,8 @@ const production = 'www.example.com';
 
 module.exports = {
   signUp: `${dev}/auth/signup`,
-  logIn: `${dev}/auth/login `
+  logIn: `${dev}/auth/login`,
+  deleteAccount : `${dev}/users/remove`,
+  about: `${dev}/users/info`
 }
 
