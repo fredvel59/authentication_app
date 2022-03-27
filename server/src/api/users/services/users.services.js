@@ -123,7 +123,7 @@ exports.passwordForgotten = async (req, res) => {
 
 
 exports.changePassword = async (req, res) => {
-  const { id } = req.params;
+  const id = req.user_id;
   const { password, newPassword, repeatePassword } = req.body;
   const user = await USERS.findOne({ where: {user_id: id}});
   if(user) {

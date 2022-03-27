@@ -94,10 +94,13 @@ Method: POST
     { 
       method: 'POST',
       headers: {
-        'Content-type': 'multipart/form-data'
+        'Content-type': 'multipart/form-data',
         'access-token': // your token
+      }, {
+        body: JSON.stringify({
+          photo: your file // you again need to use FormData() in javascript only 
+        })
       }
-      photo: your file // you again need to use FormData() in javascript only 
     }
 
 ## Get it back Password 
@@ -116,16 +119,25 @@ Method: GET
 
 ## Change Password
 
-    http://localhost:8000/users/changepasswd/:id
+    http://localhost:8000/users/changepasswd
     
 Method: POST
     
-    // body
-    {
-      "password": "your last password",
-      "newPassword": "your naw password",
-      "repeatePassword": "repeate your new password"
+    { 
+      method: 'POST',
+      headers: {
+        'Content-type': 'multipart/form-data',
+        'access-token': // your token
+      }, {
+        body: JSON.stringify({
+          "password": "your last password",
+          "newPassword": "your naw password",
+          "repeatePassword": "repeate your new password"
+        })
+      }
     }
+
+    
 
 ## Get All Users
 
