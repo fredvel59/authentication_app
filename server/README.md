@@ -105,7 +105,7 @@ Method: POST
 
 ## Get it back Password 
 
-    http://localhost:8000/users/newPassd/:id
+    http://localhost:8000/users/newPassd
     
 Method: GET
 
