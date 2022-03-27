@@ -64,23 +64,27 @@ exports.createUser = async (req, res) => {
 }
 
 exports.verifyEmail = async (req, res) => {
-  const {key} = req.body;
-  const {id} = req.params; 
+  const { key, email } = req.body;
+  // const {id} = req.params; 
   try {
-    const user = await USERS.findOne({where: {user_id: id}});
-    if(key === user.verify_email) {
-      try {
-        user.verified = true;
-        await user.save();
-        res.send({message: 'Your Key is correct, your email was verified, now you can login in the app', data: user })
-      } catch (err) {
-        res.send(err);
+    const user = await USERS.findOne({where: {email}});
+    if(user) {
+      if(key === user.verify_email) {
+        try {
+          user.verified = true;
+          await user.save();
+          res.send({message: 'Your Key is correct, your email was verified, now you can login in the app', data: user })
+        } catch (err) {
+          res.send(err);
+        }
+      }else {
+        res.send({message: 'your key is not correct, please check out your email'})
       }
     }else {
-      res.send({message: 'your key is not correct, please check out your email'})
+      res.send({message: 'Your email is not correct, try again'})
     }
   } catch (err) {
-    res.send(err)
+    res.json(err)
   }
 }
 

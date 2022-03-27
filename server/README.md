@@ -30,7 +30,7 @@ Method: POST
 
 ## Confirm Email
 
-    http://localhost:8000/auth/confirmemail/:user_id
+    http://localhost:8000/auth/verifyEmail
     
 Method: POST
     
@@ -40,6 +40,7 @@ Method: POST
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
+        email: 'your email'
         key: // copy the key from your email
       })  
     }
