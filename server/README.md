@@ -3,6 +3,12 @@
 ## Little description
 My server communicates through **REST API** also it's created complety in javascript with Nodejs and Express as framework.
 
+Made by Freddy Velarde:
+  LinkedIn: https://www.linkedin.com/in/fevs/
+  Facebook: https://www.facebook.com/freddy.velarde.969/
+  Portfolio: https://freddyvelarde.netlify.app/
+  Email: fred.vel.dev59@gmail.com
+
 ## SignUp and LogIn
 
 ## Create a new user
@@ -174,7 +180,7 @@ METHOD: POST  and you need access token
     {
       method: "POST",
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
         'access-token': // your token
       },
       body: JSON.stringify({
