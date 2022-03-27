@@ -5,7 +5,9 @@ import Inputs from '../signup/Inputs'; // we are reusing code from signup inputs
 import axios from 'axios';
 // endpoint
 import { logIn } from '../../endPoints'
-
+// redux
+import { setAuth } from '../../redux/slices/auth';
+import { useDispatch, useSelector } from 'react-redux';
 
 function LogIn() {
   const [password, setPassword] = useState(null);
@@ -15,6 +17,9 @@ function LogIn() {
   const handlerPassword = e => {
     setPassword(e);
   }
+  // redux code
+  const auth = useSelector(state => state.auth.value);
+  const dispatch = useDispatch()
 
   const logInUser = () => {
     const config = {
@@ -25,7 +30,7 @@ function LogIn() {
     }
     axios.post(logIn, body, config)
       .then(res => {
-        setResponse(res.data);
+        dispatch(setAuth(res.data));
       })
       .catch(err =>  console.log(err))
   }
