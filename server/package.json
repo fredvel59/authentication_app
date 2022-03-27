@@ -9,10 +9,14 @@
     "start": "node src/index.js"
   },
   "keywords": [],
-  "author": "Freddy Velarde",
+  "author": {
+    "name": "Freddy Velarde Silva",
+    "portfolio": "https://freddyvelarde.netlify.app",
+    "LinkedIn": "https://www.linkedin.com/in/fevs/"
+  },
   "license": "ISC",
   "dependencies": {
-    "bcryptjs": "^2.4.3",
+    "bcryptjs": "^2.4.3", 
     "cloudinary": "^1.28.1",
     "cors": "^2.8.5",
     "dotenv": "^16.0.0",
