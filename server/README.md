@@ -87,7 +87,7 @@ Method: POST
 
 ## Edit user's photo
 
-    http://localhost:8000/users/photo/:id
+    http://localhost:8000/users/photo
     
 Method: POST
     
@@ -95,6 +95,7 @@ Method: POST
       method: 'POST',
       headers: {
         'Content-type': 'multipart/form-data'
+        'access-token': // your token
       }
       photo: your file // you again need to use FormData() in javascript only 
     }

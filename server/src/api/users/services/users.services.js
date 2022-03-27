@@ -73,7 +73,8 @@ exports.editUsersInfo = async (req, res) => {
 }
 
 exports.editPhotoProfile = async (req, res) => {
-  const { id } = req.params;
+  // const { id } = req.params;
+  const id = req.user_id;
   if (req.file) {
     const user = await USERS.findOne({ where: { user_id: id } });
     if (user) {
