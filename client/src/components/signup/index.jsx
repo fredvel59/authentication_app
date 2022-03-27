@@ -6,12 +6,11 @@ import { signUp } from '../../endPoints';
 function SignUp() {
   return (
     <div>
-      <button onClick={() => console.log(signUp)} >end point</button>
-      {/* <label htmlFor="">
+      <label htmlFor="">
         <input 
           type="text"
-           />
-      </label> */}
+          placeholder='write your first name here!' />
+      </label>
       <h2>signup</h2>
     </div>
   )
