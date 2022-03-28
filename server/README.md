@@ -4,10 +4,10 @@
 My server communicates through **REST API** also it's created complety in javascript with Nodejs and Express as framework.
 
 Made by Freddy Velarde:
-  LinkedIn: https://www.linkedin.com/in/fevs/
-  Facebook: https://www.facebook.com/freddy.velarde.969/
-  Portfolio: https://freddyvelarde.netlify.app/
-  Email: fred.vel.dev59@gmail.com
+  [LinkedIn](https://www.linkedin.com/in/fevs/)
+  [Facebook](https://www.facebook.com/freddy.velarde.969/)
+  [Portfolio](https://freddyvelarde.netlify.app/)
+  [Email](fred.vel.dev59@gmail.com)
 
 ## SignUp and LogIn
 
@@ -20,20 +20,22 @@ These examples were made only for **Javascript developers**
 Method: POST
     
     // code for javascript developers
-    {
-      method: "POST",
-      headers: {
-        'Content-Type': 'application/json',
-        'Content-Type': 'multipart/form-data' // use FormData()        
-      },
-      body: JSON.stringify({
-        name: "Sergio Herrera",
-        email: "sergio.example@gmail.com",
-        photo: // if you are in javascript, you need to use FormData() to upload your file,
-        passoword: "password" // password must be greater than 6 characters
-      }),
-    }
+``` javascript    
+{
+  method: "POST",
+  headers: {
+    'Content-Type': 'application/json',
+    'Content-Type': 'multipart/form-data' // use FormData()        
+  },
+  body: JSON.stringify({
+    name: "Sergio Herrera",
+    email: "sergio.example@gmail.com",
+    photo: 'if you are in javascript, you need to use FormData() to upload your file',
+    passoword: "password" // password must be greater than 6 characters
+  }),
+}
 
+```
 ## Confirm Email
 
     http://localhost:8000/auth/verifyEmail
@@ -187,4 +189,6 @@ METHOD: POST  and you need access token
         password: 'your password' // you need your current password to remove your account
       }),
     }
+
+
 
