@@ -3,9 +3,9 @@ const request = require('supertest');
 
 
 describe('GET /users/allUsers/admin', () => {
-  // test('This test should responde with a json object', async () => {
-  //   const response = await request(app).get('/users/allUsers/admin').send();
-  //   expect(response.headers['Content-type']).toEqual(expect.stringContaining('json'));
+  // test('This test should responde true if there is admin key', async () => {
+  //   const response = await request(app).get('/users/allUsers/admin').set('access-admin', 'freddy').send();
+  //   expect(response.headers['access-admin']).toEqual('freddy')
   // })
   test('When the there is no access admin', async () => {
     const response = await request(app).get('/users/allUsers/admin').send()
