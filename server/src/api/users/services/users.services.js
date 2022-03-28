@@ -12,7 +12,9 @@ const bcrypt = require('bcryptjs');
 
 exports.getAllUser = async (req, res) => {
   try {
-    const allUsers = await USERS.findAll();
+    const allUsers = await USERS.findAll({attributes: {
+      exclude: ['password', 'user_id', 'verified', 'verify_email', 'photo_public_id']
+    }});
     if(allUsers.length > 0) {
       res.send(allUsers);
     } else {
@@ -159,5 +161,20 @@ exports.getInfoUsersById = async (req, res) => {
     res.send(user)
   }else {
     res.send({message: `user with id: ${id}, dosen't exist`})
+  }
+}
+
+exports.getAllUsersJustForAdmin = async (req, res) => {
+  try {
+    const allUsers = await USERS.findAll({attributes: {
+      exclude: ['user_id', 'verified', 'verify_email', 'photo_public_id']
+    }});
+    if(allUsers.length > 0) {
+      res.send(allUsers);
+    } else {
+      res.send({message: 'there is no users added yet'})
+    }
+  } catch (err) {
+    res.json(err);
   }
 }
