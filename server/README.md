@@ -7,7 +7,7 @@ Made by Freddy Velarde:
   [LinkedIn](https://www.linkedin.com/in/fevs/)
   [Facebook](https://www.facebook.com/freddy.velarde.969/)
   [Portfolio](https://freddyvelarde.netlify.app/)
-  [Email](fred.vel.dev59@gmail.com)
+  Email: fred.vel.dev59@gmail.com
 
 ## SignUp and LogIn
 
@@ -41,7 +41,7 @@ Method: POST
     http://localhost:8000/auth/verifyEmail
     
 Method: POST
-    
+``` javascript
     {
       method: "POST",
       headers: {
@@ -52,7 +52,7 @@ Method: POST
         key: // copy the key from your email
       })  
     }
-    
+``` 
 
 ## Register user
 
