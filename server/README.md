@@ -19,9 +19,9 @@ These examples were made only for **Javascript developers**
     
 Method: POST
     
-    // code for javascript developers
 ``` javascript    
 {
+  // code for javascript developers
   method: "POST",
   headers: {
     'Content-Type': 'application/json',
@@ -42,16 +42,16 @@ Method: POST
     
 Method: POST
 ``` javascript
-    {
-      method: "POST",
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        email: 'your email'
-        key: // copy the key from your email
-      })  
-    }
+{
+  method: "POST",
+  headers: {
+    'Content-Type': 'application/json'
+  },
+  body: JSON.stringify({
+    email: 'your email',
+    key: 'copy the key from your email'
+  })  
+}
 ``` 
 
 ## Register user
@@ -59,17 +59,19 @@ Method: POST
     http://localhost:8000/auth/login 
     
 Method: POST
-    
-    // code for javascript developers
-    method: "POST",
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify({
-      email: "sergio.example@gmail.com",
-      passoword: "password" // password must be greater than 6 characters
-    }) // this code will give you an access-token 
-
+``` javascript    
+// code for javascript developers
+{
+  method: "POST",
+  headers: {
+    'Content-Type': 'application/json'
+  },  
+  body: JSON.stringify({
+    email: "sergio.example@gmail.com",
+    passoword: "password" // password must be greater than 6 characters
+  }) // this code will give you an access-token 
+}
+```
 
 # Get Info for Users
 
@@ -78,38 +80,40 @@ Method: POST
     http://localhost:8000/users/edit
     
 Method: POST
-    
-    {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'access-token': // your token        
-      },
-      body: JSON.stringify({
-        name: "Freddy Velarde", // this section must be greater than 8 and less than 50       charactrs
-        phone: "+591 65623290",
-        bio: "Hi, I am a software developer" 
-      })
-    }
-    
+
+``` javascript    
+{
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json',
+    'access-token': // your token        
+  },
+  body: JSON.stringify({
+    name: "Freddy Velarde", // this section must be greater than 8 and less than 50       charactrs
+    phone: "+591 65623290",
+    bio: "Hi, I am a software developer" 
+  })
+}
+```
 
 ## Edit user's photo
 
     http://localhost:8000/users/photo
     
 Method: POST
-    
-    { 
-      method: 'POST',
-      headers: {
-        'Content-type': 'multipart/form-data',
-        'access-token': // your token
-      }, {
-        body: JSON.stringify({
-          photo: your file // you again need to use FormData() in javascript only 
-        })
-      }
-    }
+
+``` javascript    
+{ 
+  method: 'POST',
+  headers: {
+    'Content-type': 'multipart/form-data',
+    'access-token': // your token
+  }, 
+  body: JSON.stringify({
+    photo: your file // you again need to use FormData() in javascript only 
+  })
+}
+```
 
 ## Get it back Password 
 
@@ -117,35 +121,36 @@ Method: POST
     
 Method: GET
 
-    {
-      method: 'GET',
-      headers: {
-        'access-token': // your token
-      }
-    }    
-
+``` javascript
+{
+  method: 'GET',
+  headers: {
+    'access-token': // your token
+  }
+}    
+```
 
 ## Change Password
 
     http://localhost:8000/users/changepasswd
     
 Method: POST
-    
-    { 
-      method: 'POST',
-      headers: {
-        'Content-type': 'multipart/form-data',
-        'access-token': // your token
-      }, {
-        body: JSON.stringify({
-          "password": "your last password",
-          "newPassword": "your naw password",
-          "repeatePassword": "repeate your new password"
-        })
-      }
-    }
 
-    
+``` javascript    
+{  
+  method: 'POST',
+  headers: {
+    'Content-type': 'multipart/form-data',
+    'access-token': 'your token'
+  }, 
+  body: JSON.stringify({
+    password: "your last password",
+    newPassword: "your naw password",
+    repeatePassword: "repeate your new password"
+    })
+  }
+}
+```
 
 ## Get All Users
 
@@ -153,12 +158,15 @@ Method: POST
 
 METHOD: GET  and you need access token
 
-    {
-      method: "GET",
-      headers: {
-        "access-token": // your token
-      }
-    }
+``` javascript
+{
+  method: "GET",
+  headers: {
+    "access-token": // your token
+  }
+}
+```
+
 
 ## Get user by id 
 
@@ -166,12 +174,14 @@ METHOD: GET  and you need access token
 
 METHOD: GET  and you need access token
 
-    {
-      method: "GET",
-      headers: {
-        "access-token": // your token
-      }
-    }
+``` javascript
+{
+  method: "GET",
+  headers: {
+    "access-token": // your token
+  }
+}
+```
 
 ## Remove user
 
@@ -179,16 +189,17 @@ METHOD: GET  and you need access token
 
 METHOD: POST  and you need access token
 
-    {
-      method: "POST",
-      headers: {
-        'Content-Type': 'application/json',
-        'access-token': // your token
-      },
-      body: JSON.stringify({
-        password: 'your password' // you need your current password to remove your account
-      }),
-    }
-
+``` javascript
+{
+  method: "POST",
+  headers: {
+    'Content-Type': 'application/json',
+    'access-token': // your token
+  },
+  body: JSON.stringify({
+    password: 'your password' // you need your current password to remove your account
+  }),
+}
+```
 
 
