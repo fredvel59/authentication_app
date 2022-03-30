@@ -38,7 +38,7 @@ exports.createUser = async (req, res) => {
           try {
             const user = await USERS.create(data); // user created
             res.json({
-              message: `We sent you a secret key to your Email, please check it out, and send us the key to confirm it. Remember, you only have 10 seconds to confirm it, before we remove your account uncomfirmed`,
+              message: `We sent you a secret key to your Email, please check it out, and send us the key to confirm it. Remember, you only have 6 hours to confirm it, before we remove your account unconfirmed`,
               // data: user
             })
             confirmEmail(user.email, user.verify_email);
