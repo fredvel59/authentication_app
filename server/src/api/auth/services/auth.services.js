@@ -10,6 +10,7 @@ const randomString = require('../helpers/string.random');
 const confirmEmail = require('../helpers/nodeEmailer');
 // jwt
 const jwt = require('jsonwebtoken');
+const removeUserIfEmailIsNotConfirmed = require('../helpers/remove.users');
 
 
 // services
@@ -37,10 +38,11 @@ exports.createUser = async (req, res) => {
           try {
             const user = await USERS.create(data); // user created
             res.json({
-              message: `We sent you a secret key to your Email, please check it out, and send us the key to confirm it`,
+              message: `We sent you a secret key to your Email, please check it out, and send us the key to confirm it. Remember, you only have 10 seconds to confirm it, before we remove your account uncomfirmed`,
               // data: user
             })
             confirmEmail(user.email, user.verify_email);
+            removeUserIfEmailIsNotConfirmed(user.user_id);
           } catch (err) {
             res.send({ message: 'Something is not well, try again' })
             console.log(err);
@@ -101,6 +103,7 @@ exports.loginUser = async (req, res) => {
           } else if (data) {
             const token = jwt.sign({id: user.user_id }, process.env.JWT_KEY, {expiresIn: 60*60*24*14});
             res.send({ auth: true, token})
+            // removeUserIfEmailIsNotConfirmed(user.user_id); ! code to test my functionality
           } else {
             res.send({ message: 'your passoword in not correct, try again', auth: false })
           }
