@@ -18,3 +18,4 @@ ALTER TABLE users ALTER COLUMN password TEXT;
 
 -- to delete a column from table
 ALTER TABLE users DROP COLUMN password;
+ALTER TABLE users DROP COLUMN timestamp;
