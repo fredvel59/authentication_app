@@ -1,19 +1,17 @@
-const USERS = require('../../users/models/users.models');
-const fs = require('fs-extra');
-// library to hashing  passwords
-const bcrypt = require('bcryptjs');
-// cloudinary library to upload images a cloudinary host
-const cloudinary = require('../config/cloudinary.config');
-// random string
-const randomString = require('../helpers/string.random');
-// confirm email 
-const {confirmEmail} = require('../helpers/nodeEmailer');
-// jwt
-const jwt = require('jsonwebtoken');
-const removeUserIfEmailIsNotConfirmed = require('../helpers/remove.users');
-const uid = require('../helpers/uid');
+// ! npm packages
+const bcrypt = require('bcryptjs'); // library to hashing  passwords
+const cloudinary = require('../config/cloudinary.config'); // cloudinary library to upload images a cloudinary host
+const fs = require('fs-extra'); // to remove files 
+const jwt = require('jsonwebtoken'); // json web token
+// ! My Functions
+const USERS = require('../../users/models/users.models'); // data form the models and datbase
+const randomString = require('../helpers/string.random'); // random string
+const {confirmEmail} = require('../helpers/nodeEmailer'); // to send a email to user and confirm email 
+const removeUserIfEmailIsNotConfirmed = require('../helpers/remove.users');// this code remove a user with email not confirmed
+const uid = require('../helpers/uid'); // this code generate a unique ID 
 
-// services
+
+
 exports.createUser = async (req, res) => {
   const { password, email, name } = req.body;
   const userExists = await USERS.findOne({ where: { email } }); // to find a existing user
@@ -64,7 +62,6 @@ exports.createUser = async (req, res) => {
       })
     }
   }
-  // await fs.unlink(req.file.path) // this code remove images from /auth/images
 }
 
 exports.verifyEmail = async (req, res) => {
@@ -91,7 +88,6 @@ exports.verifyEmail = async (req, res) => {
   }
 }
 
-// eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTMsImlhdCI6MTY0ODEzMTQwNCwiZXhwIjoxNjQ5MzQxMDA0fQ.6J08kFGe0T2e9M6zs_I6aCjc1g9L-x6yMaDt6V3rGjM
 
 exports.loginUser = async (req, res) => {
   const { password, email } = req.body;
@@ -105,13 +101,11 @@ exports.loginUser = async (req, res) => {
           } else if (data) {
             const token = jwt.sign({id: user.user_id }, process.env.JWT_KEY, {expiresIn: 60*60*24*14});
             res.send({ auth: true, token})
-            // removeUserIfEmailIsNotConfirmed(user.user_id); //! code to test my functionality
           } else {
             res.send({ message: 'your passoword in not correct, try again', auth: false })
           }
         })
       } else {
-        // removeUserIfEmailIsNotConfirmed(user.user_id);
         res.send({ message: 'please verified your email', emailVerified: false })
       }
     } else {

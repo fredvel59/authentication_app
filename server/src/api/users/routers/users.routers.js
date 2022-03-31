@@ -4,7 +4,7 @@ const { testToken } = require('../../auth/config/jwt');
 const { uploadImageMiddleware } = require('../../auth/config/multer.config');
 const adminAccess = require('../config/admin.access');
 // services
-const { getAllUser, removeUser, editUsersInfo, editPhotoProfile, passwordForgotten, changePassword, getInfoUsersById, getAllUsersJustForAdmin } = require('../services/users.services');
+const { getAllUser, removeUser, editUsersInfo, editPhotoProfile, passwordForgotten, changePassword, getInfoUsersById } = require('../services/users.services');
 
 // edit user
 router.post('/remove', testToken, removeUser);
@@ -15,7 +15,6 @@ router.post('/changepasswd', testToken, changePassword);
 
 // get user's info
 router.get('/all', getAllUser);
-router.get('/allUsers/admin', adminAccess, testToken, getAllUsersJustForAdmin);
 router.get('/info', testToken, getInfoUsersById);
 
 
