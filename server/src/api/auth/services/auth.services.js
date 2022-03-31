@@ -14,12 +14,13 @@ const uid = require('../helpers/uid'); // this code generate a unique ID
 
 exports.createUser = async (req, res) => {
   const { password, email, name } = req.body;
+  const image = req.file;
   const userExists = await USERS.findOne({ where: { email } }); // to find a existing user
   if (userExists) {
     res.json({ message: `The email: ${email}, is already used, please try a new email `})
   } else { // user dosen't exists, it can be created
     if (name.length > 8 & email.length > 8 & password.length >= 6 & name.length < 50) {
-      const resImage = await cloudinary.uploader.upload(req.file.path);
+      const resImage = image ? await cloudinary.uploader.upload(req.file.path) : null;
       bcrypt.hash(password, 10, async (err, hash) => {
         if (err) {
           console.log(err);
@@ -31,8 +32,8 @@ exports.createUser = async (req, res) => {
               name, // name must be less than 50 characters
               email,
               password: hash,
-              photo: resImage.secure_url,
-              photo_public_id: resImage.public_id,
+              photo: image ? resImage.secure_url : '',
+              photo_public_id: image ? resImage.public_id : '',
               verify_email: randomString
             }
             const user = await USERS.create(data); // user created
