@@ -15,14 +15,14 @@ const removePhotoFromDatabase = async id => {
 }
 
 
-const removeUserIfEmailIsNotConfirmed = async id =>  {
-  const user = await USERS.findOne({where: {user_id: id}}) 
-  const task = cron.schedule('*/10 * * * * *', async () => {
-    if(user.verified === false){
-      // TODO: please, future me fix this issue, doesen't work
-      accountRemoved(user.email);
+const removeUserIfEmailIsNotConfirmed = async id => {
+  const user = await USERS.findOne({ where: { user_id: id } })
+  const task = cron.schedule('* 6 * * *', async () => {
+    if (user.verified === false) {
+      accountRemoved(user.user_id);
+      // TODO: please, future me fix this issue, doesen't work , this log doesn't ends
       removePhotoFromDatabase(user.photo_public_id);
-      user.destroy({where: {user_id: id}});
+      user.destroy({ where: { user_id: id } });
       task.stop();
     }
   })

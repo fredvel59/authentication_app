@@ -37,12 +37,13 @@ exports.createUser = async (req, res) => {
           }
           try {
             const user = await USERS.create(data); // user created
-            res.json({
-              message: `We sent you a secret key to your Email, please check it out, and send us the key to confirm it. Remember, you only have 6 hours to confirm it, before we remove your account unconfirmed`,
-              // data: user
-            })
-            confirmEmail(user.email, user.verify_email);
-            removeUserIfEmailIsNotConfirmed(user.user_id);
+            if(user) {
+              removeUserIfEmailIsNotConfirmed(user.user_id);
+              res.json({
+                message: `We sent you a secret key to your Email, please check it out, and send us the key to confirm it. Remember, you only have 6 hours to confirm it, before we remove your account unconfirmed`,
+              })
+              confirmEmail(user.email, user.verify_email);
+            }
           } catch (err) {
             res.send({ message: 'Something is not well, try again' })
             console.log(err);
@@ -103,12 +104,13 @@ exports.loginUser = async (req, res) => {
           } else if (data) {
             const token = jwt.sign({id: user.user_id }, process.env.JWT_KEY, {expiresIn: 60*60*24*14});
             res.send({ auth: true, token})
-            // removeUserIfEmailIsNotConfirmed(user.user_id); ! code to test my functionality
+            // removeUserIfEmailIsNotConfirmed(user.user_id); //! code to test my functionality
           } else {
             res.send({ message: 'your passoword in not correct, try again', auth: false })
           }
         })
       } else {
+        // removeUserIfEmailIsNotConfirmed(user.user_id);
         res.send({ message: 'please verified your email', emailVerified: false })
       }
     } else {
