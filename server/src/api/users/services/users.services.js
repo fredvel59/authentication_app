@@ -1,13 +1,11 @@
+// ! npm packages
+const clodinaary = require('../../auth/config/cloudinary.config'); // clodinaary to upload images
+const bcrypt = require('bcryptjs'); // bcrypt to haching passwords
+// ! My functions
 const USERS = require('../models/users.models');
 const fs = require('fs-extra');
-// clodinaary
-const clodinaary = require('../../auth/config/cloudinary.config');
-// nodemailer, newpassword function, to send an email and get it back password.
-const newPasswordEmailer = require('../helpers/emailer.passd');
-const newPassword = require('../helpers/new.password');
-// bcrypt to haching passwords
-const bcrypt = require('bcryptjs');
-
+const newPasswordEmailer = require('../helpers/emailer.passd'); // code to send a new password to user that forgotten password
+const newPassword = require('../helpers/new.password'); // code to generate a password a save in the database and then send it through email
 
 
 exports.getAllUser = async (req, res) => {
