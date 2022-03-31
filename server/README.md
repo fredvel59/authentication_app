@@ -40,18 +40,10 @@ Method: POST
 
     http://localhost:8000/auth/verifyEmail
     
-Method: POST
+Method: GET
+
 ``` javascript
-{
-  method: "POST",
-  headers: {
-    'Content-Type': 'application/json'
-  },
-  body: JSON.stringify({
-    email: 'your email',
-    key: 'copy the key from your email'
-  })  
-}
+// you only need click the link sent to your email
 ``` 
 
 ## Register user
