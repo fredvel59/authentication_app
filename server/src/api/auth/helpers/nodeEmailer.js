@@ -1,7 +1,9 @@
 // code to send an email to verify email.
 const nodemailer = require('nodemailer');
 
-const confirmEmail = (email, key) => {
+const url = 'http://localhost:8000/auth/verifyEmail/';
+
+const confirmEmail = (email, key, name) => {
   const transporter = nodemailer.createTransport({
     service: 'gmail',
     auth: {
@@ -13,13 +15,11 @@ const confirmEmail = (email, key) => {
     from: 'fred.vel.dev59@gmail.com',
     to: email,
     subject: 'Confirm Email',
-    text: `Please confirm your email and send us this key: ${key}`
+    text: `Hey ${name}, please click in this link to confirm your email: ${url}${key}`
   }
   transporter.sendMail(mailOptions, (err, info) => {
     if(err) {
-      // console.log(err);
       console.log(info);
-      // return false;
     }else {
       return `Email sent to ${email}`
     }

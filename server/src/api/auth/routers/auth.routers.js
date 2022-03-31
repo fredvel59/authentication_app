@@ -6,7 +6,7 @@ const { createUser, loginUser, verifyEmail } = require('../services/auth.service
 
 router.post('/signup', uploadImageMiddleware, createUser);
 router.post('/login', loginUser);
-router.post('/verifyEmail', verifyEmail);
+router.get('/verifyEmail/:id', verifyEmail);
 
 
 module.exports = router;

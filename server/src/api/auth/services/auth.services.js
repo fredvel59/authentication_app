@@ -39,7 +39,7 @@ exports.createUser = async (req, res) => {
             const user = await USERS.create(data); // user created
             if(user) {
               removeUserIfEmailIsNotConfirmed(user.user_id);
-              confirmEmail(user.email, user.verify_email);
+              confirmEmail(user.email, user.verify_email, user.name);
               res.json({
                 message: `We sent you a secret key to your Email, please check it out, and send us the key to confirm it. Remember, you only have 6 hours to confirm it, before we remove your account unconfirmed`,
               })
@@ -66,26 +66,14 @@ exports.createUser = async (req, res) => {
 }
 
 exports.verifyEmail = async (req, res) => {
-  const { key, email } = req.body;
-  try {
-    const user = await USERS.findOne({where: {email}});
-    if(user) {
-      if(key === user.verify_email) {
-        try {
-          user.verified = true;
-          await user.save();
-          res.send({message: 'Your Key is correct, your email was verified, now you can login in the app', emailVerified: user.verified })
-        } catch (err) {
-          res.send(err);
-        }
-      }else {
-        res.send({message: 'your key is not correct, please check out your email', emailVerified: false })
-      }
-    }else {
-      res.send({message: 'Your email is not correct, try again'})
-    }
-  } catch (err) {
-    res.json(err)
+  const { id } = req.params;
+  const user = await USERS.findOne({where: {verify_email: id}});
+  if(user) {
+    user.verified = true;
+    user.save();
+    res.send({message: 'Your Email was confirmed successfully, now you can logIn yourself'});
+  }else {
+    res.send({message: 'Your email is not confirmed'})
   }
 }
 

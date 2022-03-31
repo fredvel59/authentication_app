@@ -11,7 +11,7 @@ const newPassword = require('../helpers/new.password'); // code to generate a pa
 exports.getAllUser = async (req, res) => {
   try {
     const allUsers = await USERS.findAll({attributes: {
-      exclude: ['password', 'verified', 'verify_email', 'photo_public_id']
+      exclude: ['password', 'photo_public_id']
     }});
     if(allUsers.length > 0) {
       res.send(allUsers);
