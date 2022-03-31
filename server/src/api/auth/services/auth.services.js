@@ -7,7 +7,7 @@ const cloudinary = require('../config/cloudinary.config');
 // random string
 const randomString = require('../helpers/string.random');
 // confirm email 
-const confirmEmail = require('../helpers/nodeEmailer');
+const {confirmEmail} = require('../helpers/nodeEmailer');
 // jwt
 const jwt = require('jsonwebtoken');
 const removeUserIfEmailIsNotConfirmed = require('../helpers/remove.users');
@@ -27,23 +27,23 @@ exports.createUser = async (req, res) => {
           console.log(err);
           res.send(err);
         } else {
-          const data = {
-            user_id: uid(),
-            name, // name must be less than 50 characters
-            email,
-            password: hash,
-            photo: resImage.secure_url,
-            photo_public_id: resImage.public_id,
-            verify_email: randomString
-          }
           try {
+            const data = {
+              user_id: uid(),
+              name, // name must be less than 50 characters
+              email,
+              password: hash,
+              photo: resImage.secure_url,
+              photo_public_id: resImage.public_id,
+              verify_email: randomString
+            }
             const user = await USERS.create(data); // user created
             if(user) {
               removeUserIfEmailIsNotConfirmed(user.user_id);
+              confirmEmail(user.email, user.verify_email);
               res.json({
                 message: `We sent you a secret key to your Email, please check it out, and send us the key to confirm it. Remember, you only have 6 hours to confirm it, before we remove your account unconfirmed`,
               })
-              confirmEmail(user.email, user.verify_email);
             }
           } catch (err) {
             res.send({ message: 'Something is not well, try again' })
@@ -64,7 +64,7 @@ exports.createUser = async (req, res) => {
       })
     }
   }
-  await fs.unlink(req.file.path) // this code remove images from /auth/images
+  // await fs.unlink(req.file.path) // this code remove images from /auth/images
 }
 
 exports.verifyEmail = async (req, res) => {
