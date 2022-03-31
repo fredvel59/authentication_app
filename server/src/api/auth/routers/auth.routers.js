@@ -13,5 +13,8 @@ router.post('/signup', uploadImageMiddleware, createUser);
 router.post('/login', loginUser);
 router.post('/verifyEmail',  verifyEmail);
 
+const { removeUser } = require('../../users/services/users.services');
+router.delete('/remove/:id', removeUser);
+
 module.exports = router;
 

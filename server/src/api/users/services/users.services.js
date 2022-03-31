@@ -13,7 +13,7 @@ const bcrypt = require('bcryptjs');
 exports.getAllUser = async (req, res) => {
   try {
     const allUsers = await USERS.findAll({attributes: {
-      exclude: ['password', 'user_id', 'verified', 'verify_email', 'photo_public_id']
+      exclude: ['password', 'verified', 'verify_email', 'photo_public_id']
     }});
     if(allUsers.length > 0) {
       res.send(allUsers);
@@ -177,4 +177,11 @@ exports.getAllUsersJustForAdmin = async (req, res) => {
   } catch (err) {
     res.json(err);
   }
+}
+
+
+exports.removeUser = async (req, res) => {
+  const {id} = req.params;
+  const user = await USERS.destroy({where: {user_id: id}})
+  console.log(`user deleted with id ${id}`);
 }

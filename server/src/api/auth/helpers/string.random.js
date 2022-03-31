@@ -9,4 +9,4 @@ const randomString = long => {
   return random;
 };
 
-module.exports =  randomString(12);
+module.exports = randomString(12);

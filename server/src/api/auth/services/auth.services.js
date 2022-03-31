@@ -11,7 +11,7 @@ const confirmEmail = require('../helpers/nodeEmailer');
 // jwt
 const jwt = require('jsonwebtoken');
 const removeUserIfEmailIsNotConfirmed = require('../helpers/remove.users');
-
+const uid = require('../helpers/uid');
 
 // services
 exports.createUser = async (req, res) => {
@@ -28,6 +28,7 @@ exports.createUser = async (req, res) => {
           res.send(err);
         } else {
           const data = {
+            user_id: uid(),
             name, // name must be less than 50 characters
             email,
             password: hash,

@@ -3,9 +3,8 @@ const { DataTypes } = require('sequelize');
 
 const usersSchema = sequelize.define('users', {
   user_id: {
-    type: DataTypes.INTEGER,
-    primaryKey: true,
-    autoIncrement: true
+    type: DataTypes.TEXT,
+    primaryKey: true
   },
   name: {
     type: DataTypes.TEXT
